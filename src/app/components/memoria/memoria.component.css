@@ -1,0 +1,27 @@
+.memoria{
+  height: 100%;
+  width: 90%;
+  justify-content: center;
+}
+
+.instrucciones {
+  height: 60%;
+  width: 100%;
+  border: 1px solid #023;
+  border-bottom: none;
+  border-radius: 5%;
+  padding: 5px;
+  background-color: #29A8A8;
+  color: #fff;
+}
+
+.datos {
+  height: 70%;
+  width: 100%;
+  border: 1px solid #023;
+  border-radius: 5%;
+  padding: 5px;
+  background-color: #29A8A8;
+  margin-top: 10px;
+  color: #fff;
+}

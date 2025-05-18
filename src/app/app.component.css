@@ -1,0 +1,90 @@
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #FFFFFF;
+}
+
+.vista {
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cuadro {
+  width: 100%;
+  height: 100%;
+  padding: 5%;
+  display: flex;
+  margin: 100px 0 100px -80px;
+}
+
+.subcuadro {
+  display: flex;
+  justify-content: start;
+  height:370px;
+  margin-top: 20px;
+}
+
+.cpu {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  align-items: center;
+  gap: 20px;
+  padding: 10px;
+  border: none;
+  background-color: #000000;
+}
+
+.cpu > * {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #000000;
+}
+
+.bus {
+  width: 15%;
+  height: 80%;
+  padding: 2%;
+  margin-left:10px;
+}
+
+.memoria {
+  width: 300px;
+  height: 80%;
+  margin-left:10px;
+  margin-top: 20px;
+}
+
+.opciones {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: -580px -150px;
+}
+
+.bc > * {
+  width:300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #34D334;
+  margin: 400px -400px;
+}

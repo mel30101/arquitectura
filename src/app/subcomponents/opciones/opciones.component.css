@@ -1,0 +1,49 @@
+.fondo {
+  display: flex;
+  flex-direction: row;  
+  justify-content: start;    /* O usa 'center' o 'space-between' si lo prefieres */
+  align-items: center;    
+  width: 855px;
+  height:75px;
+  gap: 20px;
+  border-radius: 10px;
+  background-color: #F81212;
+}
+
+.btn {
+  background-color: #FFBC85;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 10px;
+  margin-left: 20px;
+}
+
+.btn-primary {
+  background-color: #FFBC85;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.operaciones{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.operandos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

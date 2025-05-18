@@ -1,0 +1,34 @@
+<main class="main">
+  <div class="vista">
+    <div class="cuadro">
+      <div class="subcuadro">
+        <div class="cpu">
+          <app-alu></app-alu>
+          <app-mar></app-mar>
+          <app-ir></app-ir>
+          <app-uc></app-uc>
+          <app-mbr></app-mbr>
+          <app-pc></app-pc>
+        </div> 
+        
+      </div>
+      <div class="bc">
+        <div>
+          <app-banco-registros></app-banco-registros>
+        </div>
+      </div>
+      
+
+      <div class="bus">
+        <app-bus></app-bus>
+      </div>
+      <div class="memoria">
+        <app-memoria></app-memoria>
+      </div>
+    </div>
+  </div>
+  <div class="opciones">
+    <app-opciones></app-opciones>
+  </div>
+  <router-outlet></router-outlet>
+</main>

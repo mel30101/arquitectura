@@ -1,0 +1,31 @@
+.alu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  width: 130px;
+  background-color: #F4D9FF;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 10%;
+  clip-path: polygon(0% 0%, 100% 0%, 78% 60%, 50% 100%, 20% 55%, 0% 0%);
+}
+
+.titulo {
+  padding-top: 0;
+  margin-top: 0;
+  font-weight: bold;
+  text-align: center;
+}
+
+.operandos {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+}
