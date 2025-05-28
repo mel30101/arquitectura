@@ -88,3 +88,37 @@ body {
   background-color: #34D334;
   margin: 400px -400px;
 }
+
+.assembler {
+  width: 40%;
+  height: 7%;
+  display: flex;
+  margin-top: 200px;
+  justify-content: center;
+  align-items: center;
+}
+
+.botones {
+  width: 0%;
+  height: 200%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.botoncito {
+  width: 100px;
+  height: 50px;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #29A8A8;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.texta {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}

@@ -15,6 +15,7 @@ import { ExecutionController } from '../../controller/ExecutionController';
 export class OpcionesComponent {
   num1: number = 0;
   num2: number = 0;
+  programa: string[] = [];
 
   constructor(
     private sharedDirectionsService: SharedDirectionsService,
@@ -36,6 +37,87 @@ export class OpcionesComponent {
   // cambiarDato(dato: any) {
   //   this.sharedDirectionsService.changeData(dato);
   // }
+
+  convertirInstruccion(texto: string): string | null {
+    let array = Helper.splitString(texto);
+    if (array.length === 0) return null;
+
+    let codop = array[0];
+    let instruccion = '';
+
+    // Mapear código a instrucción
+    switch (codop) {
+      case '1':
+        instruccion = 'ADD';
+        break;
+      case '2':
+        instruccion = 'SUB';
+        break;
+      case '3':
+        instruccion = 'MUL';
+        break;
+      case '4':
+        instruccion = 'DIV';
+        break;
+      case '5':
+        instruccion = 'MOD';
+        break;
+      case '6':
+        instruccion = 'CMP';
+        break;
+      case '7':
+        instruccion = 'AND';
+        break;
+      case '8':
+        instruccion = 'OR';
+        break;
+      case '9':
+        instruccion = 'NCMP';
+        break;
+      case '10':
+        instruccion = 'XOR';
+        break;
+      case '11':
+        instruccion = 'HALT';
+        break;
+      case '12':
+        instruccion = 'SHL';
+        break;
+      case '13':
+        instruccion = 'IN';
+        break;
+      case '14':
+        instruccion = 'OUT';
+        break;
+      default:
+        instruccion = 'NOP';
+        break;
+    }
+
+    // Para instrucciones sin operandos o con un solo operando
+    const dirOp1 = array[1];
+    const dirOp2 = array[2];
+    const dirRes = array[3];
+
+    // Construir instrucción según lo que tenga la línea
+    if (dirOp1 != null) instruccion += ',' + dirOp1;
+    if (dirOp2 != null) instruccion += ',' + dirOp2;
+    if (dirRes != null) instruccion += ',' + dirRes;
+
+    return instruccion;
+  }
+
+  // Nueva función para agregar varias instrucciones desde texto multilinea
+  agregarConjuntoInstrucciones(texto: string) {
+    const lineas = texto.split('\n');
+
+    for (let linea of lineas) {
+      const instruccionConvertida = this.convertirInstruccion(linea.trim());
+      if (instruccionConvertida !== null) {
+        this.agregarInstruccion(instruccionConvertida);
+      }
+    }
+  }
 
   captarNumeros() {
     let op1 = prompt('Ingresa el primer numero', '');

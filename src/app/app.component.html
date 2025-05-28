@@ -25,6 +25,12 @@
       <div class="memoria">
         <app-memoria></app-memoria>
       </div>
+      <div class="assembler">
+        <textarea class="texta" #inputInstrucciones rows="10" cols="50" placeholder="Escribe instrucciones una por línea..."></textarea>
+      </div>
+      <div class="botones"> 
+         <button class="botoncito"  (click)="ejecutarAgregarInstrucciones(inputInstrucciones.value)">Agregar instrucciones</button>
+      </div>
     </div>
   </div>
   <div class="opciones">

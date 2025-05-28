@@ -12,7 +12,7 @@ import { MemoriaComponent } from "./components/memoria/memoria.component";
 import { BusComponent } from "./components/buses/bus.component";
 import { FlechasComponent } from "./subcomponents/flechas/flechas.component";
 import { OpcionesComponent } from "./subcomponents/opciones/opciones.component";
-
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -37,4 +37,12 @@ import { OpcionesComponent } from "./subcomponents/opciones/opciones.component";
 })
 export class AppComponent {
   title = 'arquiProyect';
+  @ViewChild(OpcionesComponent) opcionesComp!: OpcionesComponent;
+  ejecutarAgregarInstrucciones(texto: string) {
+    if (this.opcionesComp) {
+      this.opcionesComp.agregarConjuntoInstrucciones(texto);
+    } else {
+      console.warn('OpcionesComponent no está inicializado');
+    }
+  }
 }
