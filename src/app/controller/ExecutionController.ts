@@ -29,6 +29,7 @@ export class ExecutionController {
   valorIR = '';
   valorPC = '';
   res = '';
+  ultimoResultadoALU = '';
 
   constructor(
     private sharedDirectionsService: SharedDirectionsService,
@@ -85,7 +86,7 @@ export class ExecutionController {
       this.sharedValuesService.setValorMAR(this.valorPC);
       this.uc.empezarSenal(this.elementoPC!, color);
       this.uc.empezarSenal(this.elementoMAR!, color);
-      await this.uc.sleep(2000);
+      await this.uc.sleep(1000);
     });
   }
 
@@ -97,7 +98,7 @@ export class ExecutionController {
       await this.addBlueBorderBusControl();
       await this.removeBusControl();
       this.uc.empezarSenal(this.elementoMemoInstr!, color);
-      await this.uc.sleep(2000);
+      await this.uc.sleep(1000);
     });
   }
 
@@ -109,7 +110,7 @@ export class ExecutionController {
       await this.removeBusDirecciones();
       this.uc.empezarSenal(this.elementoMAR!, color);
       this.uc.empezarSenal(this.elementoMemoInstr!, color);
-      await this.uc.sleep(2000);
+      await this.uc.sleep(1000);
     });
   }
 
@@ -125,7 +126,7 @@ export class ExecutionController {
         this.uc.empezarSenal(this.elementoMBR!, color);
         this.getValMARMemoInstr();
         this.modificarMBR(this.valorMBR);
-        await this.uc.sleep(2000);
+        await this.uc.sleep(1000);
       });
   }
 
@@ -145,7 +146,7 @@ export class ExecutionController {
       this.uc.empezarSenal(this.elementoMBR!, color);
       this.uc.empezarSenal(this.elementoIR!, color);
       this.sharedValuesService.setValorIR(this.valorMBR);
-      await this.uc.sleep(2000);
+      await this.uc.sleep(1000);
     });
   }
 
@@ -165,7 +166,7 @@ export class ExecutionController {
       this.uc.empezarSenal(this.elementoUC!, color);
       this.sharedValuesService.setValorIR(this.valorMBR);
       this.identificarInstUC();
-      await this.uc.sleep(2000);
+      await this.uc.sleep(1000);
     });
   }
 
@@ -201,10 +202,10 @@ export class ExecutionController {
     // Salto si resultado es cero
     if (codop === 'JZ') {
       const destino = Number(dirOp1);
-      if (this.res === '0' && !isNaN(destino) && destino >= 0 && destino < instruccionesLen) {
+      if (this.ultimoResultadoALU === '0' && !isNaN(destino) && destino >= 0 && destino < instruccionesLen) {
         this.sharedValuesService.setValorPC(dirOp1);
         await this.ExecutionControllerute();
-      } else if (this.res === '0') {
+      } else if (this.ultimoResultadoALU === '0') {
         console.warn(`Salto condicional a dirección inválida: ${dirOp1}`);
       }
       return;
@@ -213,10 +214,10 @@ export class ExecutionController {
     // Salto si resultado no es cero
     if (codop === 'JNZ') {
       const destino = Number(dirOp1);
-      if (this.res !== '0' && !isNaN(destino) && destino >= 0 && destino < instruccionesLen) {
+      if (this.ultimoResultadoALU !== '0' && !isNaN(destino) && destino >= 0 && destino < instruccionesLen) {
         this.sharedValuesService.setValorPC(dirOp1);
         await this.ExecutionControllerute();
-      } else if (this.res !== '0') {
+      } else if (this.ultimoResultadoALU !== '0') {
         console.warn(`Salto condicional a dirección inválida: ${dirOp1}`);
       }
       return;
@@ -228,6 +229,7 @@ export class ExecutionController {
     await this.calcularDirOp(dirOp1, dirOp2); //calcula las direcciones de los operandos
     await this.moverBRALU(dirOp1, dirOp2); //mueve los operandos a la ALU
     await this.ExecutionControllerUCALU(codop); //ejecuta la operación en la ALU
+    this.ultimoResultadoALU = this.res; //guarda el último resultado de la ALU
     await this.moverUCMAR(dirRes); //mueve la dirección del resultado a la MAR
     await this.modificarALU_MBR(); //mueve el resultado de la ALU al MBR
     await this.escribirUCMemoDatos(); //escribe el valor de la UC en la memoria de datos
@@ -264,7 +266,7 @@ export class ExecutionController {
       this.uc.empezarSenal(this.elementoUC!, color);
       this.uc.empezarSenal(this.elementoMAR!, color);
       this.sharedValuesService.setValorMAR(dirOp);
-      await this.uc.sleep(2000);
+      await this.uc.sleep(1000);
     });
   }
 
@@ -275,7 +277,7 @@ export class ExecutionController {
       await this.removeBusControl();
       this.uc.empezarSenal(this.elementoUC!, color);
       this.uc.empezarSenal(this.elementoMemoDatos!, color);
-      await this.uc.sleep(2000);
+      await this.uc.sleep(1000);
     });
   }
 
@@ -286,7 +288,7 @@ export class ExecutionController {
       await this.removeBusDirecciones();
       this.uc.empezarSenal(this.elementoMAR!, color);
       this.uc.empezarSenal(this.elementoMemoDatos!, color);
-      await this.uc.sleep(2000);
+      await this.uc.sleep(1000);
     });
   }
 
@@ -301,7 +303,7 @@ export class ExecutionController {
         this.uc.empezarSenal(this.elementoMBR!, color);
         this.getValMARMemoDatos();
         this.modificarMBR(this.valorMBR);
-        await this.uc.sleep(2000);
+        await this.uc.sleep(1000);
       });
   }
 
@@ -316,7 +318,7 @@ export class ExecutionController {
       this.uc.empezarSenal(this.elementoMBR!, color);
       this.uc.empezarSenal(this.elementoBR!, color);
       this.sharedDirectionsService.pushDataRegistros(this.valorMBR);
-      await this.uc.sleep(2000);
+      await this.uc.sleep(1000);
     });
   }
 
@@ -328,10 +330,16 @@ export class ExecutionController {
       let i1 = parseInt(dirOp1);
       let i2 = parseInt(dirOp2);
       let op1 = this.sharedDirectionsService.getDato(i1);
-      let op2 = this.sharedDirectionsService.getDato(i2);
+      let op2: string;
+      if (dirOp2 !== undefined && dirOp2 !== null && dirOp2.trim() !== '' && !isNaN(Number(dirOp2))) {
+        let i2 = parseInt(dirOp2);
+        op2 = this.sharedDirectionsService.getDato(i2);
+      } else {
+        op2 = '0';
+      }
       this.sharedValuesService.setValorOP1(op1);
       this.sharedValuesService.setValorOP2(op2);
-      await this.uc.sleep(2000);
+      await this.uc.sleep(1000);
     });
   }
 
@@ -341,7 +349,7 @@ export class ExecutionController {
       this.uc.empezarSenal(this.elementoUC!, color);
       this.uc.empezarSenal(this.elementoALU!, color);
       this.alu.realizarOperacion(codop);
-      await this.uc.sleep(2000);
+      await this.uc.sleep(1000);
     });
   }
 
@@ -351,7 +359,7 @@ export class ExecutionController {
       this.uc.empezarSenal(this.elementoALU!, color);
       this.uc.empezarSenal(this.elementoMBR!, color);
       this.modificarMBR(this.res);
-      await this.uc.sleep(2000);
+      await this.uc.sleep(1000);
     });
   }
 
@@ -362,7 +370,7 @@ export class ExecutionController {
       await this.removeBusControl();
       this.uc.empezarSenal(this.elementoUC!, color);
       this.uc.empezarSenal(this.elementoMemoDatos!, color);
-      await this.uc.sleep(2000);
+      await this.uc.sleep(1000);
     });
   }
 
@@ -373,7 +381,7 @@ export class ExecutionController {
       await this.removeBusDirecciones();
       this.uc.empezarSenal(this.elementoMAR!, color);
       this.uc.empezarSenal(this.elementoMemoDatos!, color);
-      await this.uc.sleep(2000);
+      await this.uc.sleep(1000);
     });
   }
 
@@ -386,7 +394,7 @@ export class ExecutionController {
       this.uc.empezarSenal(this.elementoMBR!, color);
       this.uc.empezarSenal(this.elementoMemoDatos!, color);
       this.sharedDirectionsService.insertarMemoDatos(dir, valor);
-      await this.uc.sleep(2000);
+      await this.uc.sleep(1000);
     });
   }
   //////////////////////////////////////////////////////
@@ -405,7 +413,7 @@ export class ExecutionController {
       this.sharedValuesService.setValorOP1(this.valorPC);
       this.sharedValuesService.setValorOP2('1');
       this.alu.realizarOperacion('ADD');
-      await this.uc.sleep(2000);
+      await this.uc.sleep(1000);
     });
   }
 
@@ -415,7 +423,7 @@ export class ExecutionController {
       this.uc.empezarSenal(this.elementoALU!, color);
       this.uc.empezarSenal(this.elementoBR!, color);
       this.sharedDirectionsService.pushDataRegistros(this.res);
-      await this.uc.sleep(2000);
+      await this.uc.sleep(1000);
     });
   }
 
@@ -425,14 +433,14 @@ export class ExecutionController {
       this.uc.empezarSenal(this.elementoBR!, color);
       this.uc.empezarSenal(this.elementoPC!, color);
       this.sharedValuesService.setValorPC(this.res);
-      await this.uc.sleep(2000);
+      await this.uc.sleep(1000);
     });
   }
 
   async addGrayBorderBusDatos(): Promise<void> {
     return new Promise(async (resolve) => {
       this.elementoBusDatos!.style.border = '5px solid gray';
-      await this.uc.sleep(2000);
+      await this.uc.sleep(1000);
       resolve(); // Resuelve la promesa inmediatamente
     });
   }
@@ -447,7 +455,7 @@ export class ExecutionController {
   async addBlueBorderBusControl(): Promise<void> {
     return new Promise(async (resolve) => {
       this.elementoBusControl!.style.border = '5px solid blue';
-      await this.uc.sleep(2000);
+      await this.uc.sleep(1000);
       resolve();
     });
   }
@@ -462,7 +470,7 @@ export class ExecutionController {
   async addGreenBorderBusDirecciones(): Promise<void> {
     return new Promise(async (resolve) => {
       this.elementoBusDirecciones!.style.border = '5px solid #00FF26';
-      await this.uc.sleep(2000);
+      await this.uc.sleep(1000);
       resolve();
     });
   }

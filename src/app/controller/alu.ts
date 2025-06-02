@@ -84,6 +84,8 @@ export class ALU {
     }
 
     this.res = res.toString();
+    // mostrar en consola el resultado
+    console.log(`Resultado de ${codop}:`, this.res);
     this.sharedValuesService.setValorRes(this.res);
   }
 }
