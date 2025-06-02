@@ -183,6 +183,44 @@ export class ExecutionController {
     let dirOp1 = array[1]; //dirección del operando 1
     let dirOp2 = array[2]; //dirección del operando 2
     let dirRes = array[3]; //dirección del resultado
+    const instruccionesLen = this.sharedDirectionsService.getDataInstrccionesLen();
+
+    // Instrucción de salto incondicional
+    if (codop === 'JMP') {
+      const destino = Number(dirOp1);
+      if (!isNaN(destino) && destino >= 0 && destino < instruccionesLen) {
+        this.sharedValuesService.setValorPC(dirOp1);
+        await this.ExecutionControllerute();
+      } else {
+        // Dirección inválida, simplemente no hace nada
+        console.warn(`Salto a dirección inválida: ${dirOp1}`);
+      }
+      return;
+    }
+
+    // Salto si resultado es cero
+    if (codop === 'JZ') {
+      const destino = Number(dirOp1);
+      if (this.res === '0' && !isNaN(destino) && destino >= 0 && destino < instruccionesLen) {
+        this.sharedValuesService.setValorPC(dirOp1);
+        await this.ExecutionControllerute();
+      } else if (this.res === '0') {
+        console.warn(`Salto condicional a dirección inválida: ${dirOp1}`);
+      }
+      return;
+    }
+
+    // Salto si resultado no es cero
+    if (codop === 'JNZ') {
+      const destino = Number(dirOp1);
+      if (this.res !== '0' && !isNaN(destino) && destino >= 0 && destino < instruccionesLen) {
+        this.sharedValuesService.setValorPC(dirOp1);
+        await this.ExecutionControllerute();
+      } else if (this.res !== '0') {
+        console.warn(`Salto condicional a dirección inválida: ${dirOp1}`);
+      }
+      return;
+    }
 
     // if ('MOV' != codop) {
     //   await this.moveInstr();

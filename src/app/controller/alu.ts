@@ -73,6 +73,10 @@ export class ALU {
       case 'SHR': // Desplazamiento a la derecha
         res = Number(this.op1) >> Number(this.op2);
         break;
+      
+      case 'DEC': // Decrementar
+        res = Number(this.op1) - 1;
+        break;
 
       default: // Manejo de operación no reconocida
         console.error('Operación no reconocida:', codop);

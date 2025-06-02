@@ -89,6 +89,18 @@ export class OpcionesComponent {
       case '14':
         instruccion = 'OUT';
         break;
+      case '15':
+        instruccion = 'JMP';
+        break;
+      case '16':
+        instruccion = 'JZ';
+        break;
+      case '17':
+        instruccion = 'JNZ';
+        break;
+      case '18':
+        instruccion = 'DEC';
+        break;
       default:
         instruccion = 'NOP';
         break;
@@ -279,6 +291,10 @@ export class OpcionesComponent {
       `
       HALT: 1
       SHL: 2
+      JMP: 3
+      JZ: 4
+      JNZ: 5
+      DEC: 6
     `,
       ''
     );
@@ -297,6 +313,18 @@ export class OpcionesComponent {
         break;
       case '2':
         instruccion = 'SHL';
+        break;
+      case '3':
+        instruccion = 'JMP';
+        break;
+      case '4':
+        instruccion = 'JZ';
+        break;
+      case '5':
+        instruccion = 'JNZ';
+        break;
+      case '6':
+        instruccion = 'DEC';
         break;
       default:
         instruccion = 'NOP';
